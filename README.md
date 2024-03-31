@@ -286,6 +286,114 @@ hist(T,prob=TRUE)
 x=seq(-3,3,by=0.01)
 curve(dnorm(x),lwd=2,add=TRUE)
 
+## 6
+1.
+> x=c(1 ,8 ,34 ,4, 4, 4, 1 ,1, 12 ,25,
++     9 ,4, 4 ,29, 12 ,14 ,1, 19, 34, 11,
++     8 ,15 ,14 ,7 ,15, 2 ,20 ,29 ,3 ,21,
++     13 ,2 ,4 ,7 ,3 ,6 ,1 ,30 ,1 ,28,
++     7 ,15, 4, 4 ,1 ,17, 2, 7, 3, 1)
+> n=length(x)
+> n
+[1] 50
+> theta_cap = min(x);theta_cap
+[1] 1
+> theta = {}
+> jt={}
+> for (i in 1:n)
++ {
++   theta[i] = min(x[-i])
++   jt[i] = n*theta_cap-(n-1)*theta[i]
++ }
+> theta
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+[47] 1 1 1 1
+> jt
+ [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+[47] 1 1 1 1
+> avg_theta = mean(theta);avg_theta
+[1] 1
+> j_theta = n*theta_cap-(n-1)*avg_theta;j_theta
+[1] 1
+
+95% Confidence interval for theta:
+
+> sigmaj2 = (1/(n-1))*sum((jt-j_theta)^2);sigmaj2
+[1] 0
+> j_theta - 1.96 * sqrt(sigmaj2/n)
+[1] 1
+> j_theta + 1.96 * sqrt(sigmaj2/n)
+[1] 1
+
+2.
+> x=c(19 ,23 ,24 ,20 ,28, 25 ,23 ,22, 19, 26,
++     24 ,24 ,18, 24, 23, 22, 21, 19, 24, 25,
++     26 ,25 ,24 ,25 ,19, 21, 20, 22 ,23, 24)
+> n=length(x)
+> theta_cap = max(x);theta_cap
+[1] 28
+
+> theta = {}
+> jt={}
+> for (i in 1:n)
++ {
++   theta[i] = max(x[-i])
++   jt[i] = n*theta_cap-(n-1)*theta[i]
++ }
+> theta
+ [1] 28 28 28 28 26 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28
+> jt
+ [1] 28 28 28 28 86 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28 28
+
+> avg_theta = mean(theta);avg_theta
+[1] 27.93333
+> j_theta = n*theta_cap-(n-1)*avg_theta;j_theta
+[1] 29.93333
+
+95% Confidence interval for theta:
+
+> sigmaj2 = (1/(n-1))*sum((jt-j_theta)^2);sigmaj2
+[1] 112.1333
+> j_theta - 1.96 * sqrt(sigmaj2/n)
+[1] 26.144
+> j_theta + 1.96 * sqrt(sigmaj2/n)
+[1] 33.72267
+
+3. x1=c(9.75,9.79,9.83,9.88,9.9,9.87,9.67,9.94,9.82,9.69,9.68,9.73,9.74,9.75,9.87,9.92,9.78,9.9,9.77,9.9)
+>x2=c(9.88,9.56,10.05,9.43,9.8,10.35,10.09,9.79,9.84,9.98,10.1,9.61,9.78,10.22,9.9)
+> n1=length(x1)
+> n2=length(x2)
+
+Jack Knife estimate for sigma1^2:
+
+> sig1cap = (1/(n1))*sum((x1-mean(x1))^2);sig1cap
+[1] 0.006909
+
+> sig1 = {}
+> jt={}
+> for (i in 1:n1)
++ {
++   sig1[i] = (1/(n1-1))*sum((x1[-i]-mean(x1[-i]))^2)
++   jt[i] = n1*sig1cap-(n1-1)*sig1[i]
++ }
+> sig1
+
+> jt
+
+> avg_sig1 = mean(sig1);avg_sig1
+[1] 0.006889861
+> j_theta1 = n1*sig1cap-(n1-1)*avg_sig1;j_theta1
+[1] 0.007272632
+
+95% Confidence interval for sigma1^2:
+
+> sigmaj2 = (1/(n1-1))*sum((jt-j_theta1)^2);sigmaj2
+[1] 4.026357e-05
+> j_theta1 - 1.96 * sqrt(sigmaj2/n1)
+[1] 0.004491656
+> j_theta1 + 1.96 * sqrt(sigmaj2/n1)
+[1] 0.01005361
+
 
 ## Preac 8
 > df=read.csv(file.choose()) 
