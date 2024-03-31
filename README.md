@@ -1,14 +1,8 @@
 ## prac1
 1.
-
-X=c(1.312,1.314,1.479,1.552,1.7,1.803,1.861,1.865,2.14,2.179,1.944,1.958,1.966,1.997,2.006,2.021,2.027,2.055,2.063,2.098,2.24,2.253,2.27,2.272,2.274,2.301,2.301,2.359,2.382,2.382,2.478,2.684,3.067,2.633,2.49,
-    2.697,3.084,2.642,2.511,2.726,3.09,2.648,2.514,2.77,3.096,2.426,2.535,2.773,3.128,2.434,2.554,2.8,3.233,2.435,2.566,2.809,3.433,2.88,2.57,2.818,3.585,2.954,2.586,2.821,3.585,3.012,2.629,2.848,2.224)
+X=c()
 T={}
 n=length(X)
-n
-
-[1] 69
-
 x1=seq(1/n,1,by=1/n)
 y=sort(X)
 for(i in 1:n)
@@ -27,16 +21,8 @@ lines(x1,x1,type="l")
        }
  opt1=optimize(logL1,c(0,30),maximum=TRUE)
  a1=opt1$maximum ; a1
-
-[1] 23.38194
  b1=a1/mean(X) ; b1
-
-[1] 9.538456
- opt1 
-$maximum
-[1] 23.38194
-$objective
-[1] -50.03736
+ opt1
  
  #weibull distribution
 logL2=function(a2)
@@ -47,19 +33,8 @@ logL2=function(a2)
      }
 opt2=optimize(logL2,c(0,30),maximum=TRUE)
 a2=opt2$maximum ; a2
-
-[1] 5.504849
-
 b2=n/sum(X^a2) ; b2
-
-[1] 0.004670037
-
 opt2 
-
-$maximum
-[1] 5.504849
-$objective
-[1] -49.59614
 
  #exponentiated exponential
 logL3=function(b3)
@@ -70,18 +45,8 @@ logL3=function(b3)
   }
  opt3=optimize(logL3,c(0,30),maximum=TRUE)
  b3=opt3$maximum ; b3
-
-[1] 2.037459
-
  a3=-n/sum(log(1-exp(-b3*X))); a3
-
-[1] 88.22194
-
 opt3
-$maximum
-[1] 2.037459
-$objective
-[1] -54.62014
 
 hist(y,prob=TRUE,ylim=c(0,1)) 
 lines(y,dgamma(y,a1,b1),type="l")
@@ -91,11 +56,9 @@ lines(y,fun3,type="l",col=3)
 A=c("Gamma","Weibull","EE")
 legend(x="topleft",legend=c(A),col=c(1,2,3),lty=1)
 
- 
 
 p=1-pweibull(3,a2,1/b2^(1/a2))
 p
-[1] 0.1386138
 
  #survival function
 plot(y,(1-pweibull(y,a2,1/b2^(1/a2))),xlab="failure stress",ylab="survival rate",type="l")
@@ -104,24 +67,7 @@ plot(y,(1-pweibull(y,a2,1/b2^(1/a2))),xlab="failure stress",ylab="survival rate"
 plot(y,dweibull(y,a2,1/b2^(1/a2))/(1-pweibull(y,a2,1/b2^(1/a2))),ylab="failure rate",xlab="failure stress",type="l")
   
 2.
-x = c(194, 413, 90, 74, 55, 23, 97, 50, 359, 50, 130, 487,
-      102, 15, 14, 10, 57, 320, 261, 51, 44, 9, 254, 493,
-      18, 209, 41, 58, 60, 48, 56, 87, 11, 102, 12, 5,
-      100, 14, 29, 37, 186, 29, 104, 7, 4, 72, 270, 283,
-      7, 57, 33, 100, 61, 502, 220, 120, 141, 22, 603, 35,
-      98, 54, 181, 65, 49, 12, 239, 14, 18, 39, 3, 12,
-      5, 32, 9, 14, 70, 47, 62, 142, 3, 104, 85, 67,
-      169, 24, 21, 246, 47, 68, 15, 2, 91, 59, 447, 56,
-      29, 176, 225, 77, 197, 438, 43, 134, 184, 20, 386, 182,
-      71, 80, 188, 230, 152, 36, 79, 59, 33, 246, 1, 79,
-      3, 27, 201, 84, 27, 21, 16, 88, 130, 14, 118, 44,
-      15, 42, 106, 46, 230, 59, 153, 104, 20, 206, 5, 66,
-      34, 29, 26, 35, 5, 82, 5, 61, 31, 118, 326, 12,
-      54, 36, 34, 18, 25, 120, 31, 22, 18, 156, 11, 216,
-      139, 67, 310, 3, 46, 210, 57, 76, 14, 111, 97, 62,
-      26, 71, 39, 30, 7, 44, 11, 63, 23, 22, 23, 14,
-      18, 13, 34, 62, 11, 191, 14, 16, 18, 130, 90, 163,
-      208, 1, 24, 70, 16, 101, 52, 208, 95)
+x = c()
 y = sort(x)
 n = length(y)
 z =c()
@@ -299,28 +245,6 @@ cp3=f1(0.03,2,n)
 cp4=f1(0.04,2,n)
 df=data.frame(n,cp1,cp2,cp3,cp4)
 df
-      n       cp1       cp2       cp3       cp4
-1    50 0.2211992 0.3934693 0.5276334 0.6321206
-2   100 0.3934693 0.6321206 0.7768698 0.8646647
-3   150 0.5276334 0.7768698 0.8946008 0.9502129
-4   200 0.6321206 0.8646647 0.9502129 0.9816844
-5   250 0.7134952 0.9179150 0.9764823 0.9932621
-6   300 0.7768698 0.9502129 0.9888910 0.9975212
-7   350 0.8262261 0.9698026 0.9947525 0.9990881
-8   400 0.8646647 0.9816844 0.9975212 0.9996645
-9   450 0.8946008 0.9888910 0.9988291 0.9998766
-10  500 0.9179150 0.9932621 0.9994469 0.9999546
-11  550 0.9360721 0.9959132 0.9997387 0.9999833
-12  600 0.9502129 0.9975212 0.9998766 0.9999939
-13  650 0.9612258 0.9984966 0.9999417 0.9999977
-14  700 0.9698026 0.9990881 0.9999725 0.9999992
-15  750 0.9764823 0.9994469 0.9999870 0.9999997
-16  800 0.9816844 0.9996645 0.9999939 0.9999999
-17  850 0.9857358 0.9997965 0.9999971 1.0000000
-18  900 0.9888910 0.9998766 0.9999986 1.0000000
-19  950 0.9913483 0.9999251 0.9999994 1.0000000
-20 1000 0.9932621 0.9999546 0.9999997 1.0000000
-
 plot(n,cp1,data=df,ylab="Coverage Probability",type = "l")
 lines(n,cp2,data=df,col=2)
 lines(n,cp3,data=df,col=3)
@@ -328,15 +252,9 @@ lines(n,cp4,data=df,col=4)
 A=c("0.01","0.02","0.03","0.04")
 legend(x="bottomright",legend = c(A),col=c(1,2,3,4),lty=1,title="abs")
  
-
 x=c(0.01,0.02,0.03,0.04)
 mn=floor(-(2*log(0.05)/x))+1
 mn
-[1] 600 300 200 150
-
-2.
-
-
 
 4.
 n=50
@@ -353,9 +271,6 @@ hist(T,prob=TRUE)
 x=seq(-3,3,by=0.01)
 curve(dnorm(x),lwd=2,add=TRUE)
  
-
-
-
 5.
 n=25
 k=1000
@@ -370,10 +285,6 @@ for(i in 1:k){
 hist(T,prob=TRUE)
 x=seq(-3,3,by=0.01)
 curve(dnorm(x),lwd=2,add=TRUE)
- 
-
-
-
 
 
 ## Preac 8
@@ -382,23 +293,18 @@ curve(dnorm(x),lwd=2,add=TRUE)
 > plot.ts(df$IPG2211A2N,ylab="Electric Production",main="Monthly Electricity Production")
  
 Seasonal Difference:
-> v=var(Xt);v
-[1] 236.7854
-> yt=diff(Xt,lag=12)
-> v1=var(yt);v1
-[1] 11.76307
-> yt2=diff(yt,lag=12)
-> v2=var(yt2);v2
-[1] 29.46542
+ v=var(Xt);v
+ yt=diff(Xt,lag=12)
+ v1=var(yt);v1
+ yt2=diff(yt,lag=12)
+ v2=var(yt2);v2
+
 Trend Difference:
-> v1=var(yt);v1
-[1] 11.76307
+v1=var(yt);v1
 > y1=diff(yt)
 > v2=var(y1);v2
-[1] 10.95944
 > y2=diff(y1)
 > v3=var(y2):v3
-[1] 26.11361
 > acf(y1,lag.max=40) # 2sqrt(n)=24
 > pacf(y1,lag.max=40)
  
@@ -445,23 +351,13 @@ model=arima(Xt,order=c(p,d,q),seasonal=list(order=c(i,j,k),period=12,method="CSS
 > q=1
 > Q=2
 > model1=arima(Xt,order=c(p,d,q),seasonal=list(order=c(P,D,Q),period=12));model1
-Call:
-arima(x = Xt, order = c(p, d, q), seasonal = list(order = c(P, D, Q), period = 12))
-Coefficients:
- ar1 ma1 sar1 sar2 sma1 sma2
- 0.4963 -0.9502 0.5627 -0.3019 -1.3081 0.5366
-s.e. 0.0518 0.0181 0.2064 0.0679 0.2086 0.1689
-sigma^2 estimated as 5.45: log likelihood = -878.33, aic = 1770.67
 > aic1=model1$aic;aic1
-[1] 1770.67
 > # Residual Analysis
 > residual=model1$residuals
 > acf(residual,lag.max=24)
  
 > result=Box.test(residual,lag=24,type="Ljung-Box",fitdf=p+q);result
- Box-Ljung test
-data: residual
-X-squared = 29.298, df = 22, p-value = 0.1365
+
 Yuler Walker Equation ( AR(3) Model ):
 > acf_values=acf(y1, lag.max = 40, plot = FALSE)
 > r=acf_values$acf
